@@ -3,10 +3,53 @@ title: "main"
 format: html
 ---
 
-Load "urban-green.csv" as urban_green via here
+## Aufgabe 4
+
+Lade "urban-green.csv" als urban_green via here
 
 ```{r}
 library(here)
+library(dplyr)
 
 urban_green <- here("urban_green.csv") |> read.csv()
+```
+
+## Aufgabe 5
+
+Lösche alle NA-Werte via. na.omit und speichere sie als "urban_green_clean"
+
+```{r}
+urban_green_clean <- na.omit(urban_green)
+```
+
+## Aufgabe 6
+
+#### 6.1 Durchschnittliche Grünfläche
+
+```{r}
+urban_green_clean |>
+  select(ShareOfGreenArea)|>
+  summarise(durchschnitt = mean(ShareOfGreenArea))
+
+```
+
+#### 6.2 Stadt mit dem kleinsten Anteil an Grünfläche pro Kopf (\>0) in 2020
+
+```{r}
+urban_green_clean|>
+  filter((year == 2020) & (GreenAreaPerCapita > 0))|>
+  select(cityName,GreenAreaPerCapita) |>
+  arrange(GreenAreaPerCapita)|>
+  slice(1)
+```
+
+#### 6.3 Stadt mit dem größten Anteil an Grünfläche in jedem Land in jedem Jahr
+
+```{r}
+urban_green_clean |>
+  group_by(year,country) |>
+  arrange(desc(ShareOfGreenArea)) |>
+  slice(1) |>
+  select(year, country, cityName, ShareOfGreenArea)
+
 ```
