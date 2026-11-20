@@ -5,6 +5,8 @@ format: html
 
 ## Aufgabe 4
 
+*4. Load urban_green.csv on green areas in cities as urban_green using the package here.*
+
 Lade "urban-green.csv" als urban_green via here
 
 ```{r}
@@ -16,6 +18,8 @@ urban_green <- here("urban_green.csv") |> read.csv()
 
 ## Aufgabe 5
 
+*5. Clean the data: remove missing values (NA)*
+
 Lösche alle NA-Werte via. na.omit und speichere sie als "urban_green_clean"
 
 ```{r}
@@ -24,7 +28,11 @@ urban_green_clean <- na.omit(urban_green)
 
 ## Aufgabe 6
 
+*6. Transform the data:*
+
 #### 6.1 Durchschnittliche Grünfläche
+
+*1. Calculate the average share of green area.*
 
 ```{r}
 urban_green_clean |>
@@ -34,6 +42,8 @@ urban_green_clean |>
 ```
 
 #### 6.2 Stadt mit dem kleinsten Anteil an Grünfläche pro Kopf (\>0) in 2020
+
+*2. Show the city with the lowest non-zero share of green area per capita in 2020.*
 
 ```{r}
 urban_green_clean|>
@@ -45,6 +55,8 @@ urban_green_clean|>
 
 #### 6.3 Stadt mit dem größten Anteil an Grünfläche in jedem Land in jedem Jahr
 
+*3. Show the city with the largest share of green area in each country in each year.*
+
 ```{r}
 urban_green_clean |>
   group_by(year,country) |>
@@ -53,3 +65,33 @@ urban_green_clean |>
   select(year, country, cityName, ShareOfGreenArea)
 
 ```
+
+## 7. Datenvisualisierung
+
+*7. Visualize the data:*
+
+#### 7.1 3 Interessante Grafiken
+
+ 1. Create three interesting graphs. For example, show the change over time for one country or compare several countries. You can get creative here and may transform the data as you like.
+
+Grafik 1
+
+```{r}
+
+```
+
+Grafik 2
+
+```{r}
+
+```
+
+Grafik 3
+
+```{r}
+
+```
+
+#### *7.2 Verschönere die Grafiken* 
+
+*2. Prettify the graphs.*

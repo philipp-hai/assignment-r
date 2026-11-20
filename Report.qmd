@@ -1,0 +1,18 @@
+---
+title: "Report"
+format: html
+---
+
+## 8. Bericht
+
+8.  *Report:*
+
+#### 8.1 Was zeigt jede Grafik? Was sind die Kernaussagen?
+
+1.  *Describe what each graph shows and point out its key findings.*
+
+#### 8.2 Welche Packages wurden benutzt?
+
+2.Cite the packages you used.
+
+# 3. Render the report.
