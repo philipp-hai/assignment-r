@@ -77,7 +77,32 @@ urban_green_clean |>
 Grafik 1
 
 ```{r}
+#beschreibt den Zusammenhang zwischen Grünflächenanteil in % (ShareOfGreenArea) und der Grünfläche pro Einwohner in m² (GreenAreaPerCapita) der Länder (die in ihre UN-Weltregionen eingeordnet sind) im Jahr 2020 (da für 2025 die Werte nicht vollständig sind und 2020 damit das aktuellste vollständige Jahr ist) --> Wenn insgesamt viel Grünfläche existiert, hat dann jede Person im Schnitt auch mehr Grünfläche zur Verfügung? --> Grafik untersucht den Einfluss der Einwohnerdichte
 
+library(tidyverse)
+library(gapminder)
+library(RColorBrewer)
+
+graph1 <- urban_green_clean |>  #zur Übersichtlichkeit: Erstellung der Variable graph1
+  filter(year==2020) |> 
+  ggplot()+
+  geom_point(aes(x=ShareOfGreenArea, y=GreenAreaPerCapita, color=sdgRegion))+ #geom_point, weil metrische Daten, Punkte sind die einzelnen Städte, farblich sortiert nach ihren zugehörigen Regionen
+  
+#Prettify
+  scale_color_brewer(palette="Paired")+ #nicht so grell und alle 8 Gruppen passen in Palette
+  theme_minimal()+
+  theme(text=element_text(size=11),
+        panel.background=element_rect(fill="mintcream"), #sehr dezent, da grafik schon sehr farbig
+        legend.position="right")+ #damit alles gut im Bild und nicht zu klein ist
+  labs(title="Grünflächenanteil und Grünfläche pro Kopf (2020)",
+       x="Grünflächenanteil (%)",
+       y="Grünfläche pro Einwohner (m²)",
+       color="UN-Weltregion") #übersichtliche Achsenbeschriftung + Überschriften
+
+
+  graph1
+
+#Interpretation: grundsätzlich positiver Zusammenhang: bei höherem Grünflächenanteil auch mehr Grünfläche pro Kopf, aber starke Streuung: einige Städte haben bei gleichem Grünflächenanteil viel mehr Grünfläche pro Kopf als Andere -> sind weniger stark besiedelt. Bei der Region: "Northern America and Europe" kann man beispielsweise erkennen, dass viele Städte bei einem vergleichweise großen Gesamtgrünflächenanteil, sehr wenig Grünflächenanteil pro Kopf haben, was auf eine hohe Bevölkerungsdichte hinweist, während "Western Asia and Northern Africa" viele gegensätzliche Ausreißer enthält.
 ```
 
 Grafik 2
