@@ -1,0 +1,46 @@
+---
+title: Assignment
+subtitle: Introduction to R
+author: Ronja Huhn, TU Dresden
+
+format: typst
+
+editor:
+  markdown:
+    wrap: sentence
+    
+bibliography: references.bib
+---
+
+In your assignment, you can use the skills you have learned during the course.
+The data used for the assignment are obtained from the `Open Spaces and Green Areas` and wrangled by [@urban2026].
+Please work in teams of 4 students.
+
+
+Please hand in your entire `R` project, including the datasets, in a zipped folder, via e-mail to [ronja.huhn@tu-dresden.de](mailto:ronja.huhn@tu-dresden.de).
+The deadline is 31 December 2026, 11.59 PM.
+The `.qmd` document needs to render without an error.
+
+Please follow these steps.
+Steps 4--8 are to be carried out within a `Quarto` document.
+
+1.  Create a new `R` project.
+2.  Copy the file `urban_green.csv` to this project.
+3.  Create a `Quarto` document within this project.
+4.  Load `urban_green.csv` on green areas in cities as `urban_green` using the package `here`.
+5.  Clean the data: remove missing values (`NA`)
+6. Transform the data:
+   1. Calculate the average share of green area.
+   2. Show the city with the lowest non-zero share of green area per capita in 2020.
+   3. Show the city with the largest share of green area in each country in each year.
+7. Visualize the data:
+   1. Create three interesting graphs. For example, show the change over time for one country or compare several countries. You can get creative here and may transform the data as you like.
+   2. Prettify the graphs.
+8. Report:
+   1. Describe what each graph shows and point out its key findings.
+   2. Cite the packages you used.
+   3. Render the report.
+
+Happy coding -- and googling!
+
+
