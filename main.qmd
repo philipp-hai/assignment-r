@@ -86,7 +86,8 @@ library(RColorBrewer)
 graph1 <- urban_green_clean |>  #zur Übersichtlichkeit: Erstellung der Variable graph1
   filter(year==2020) |> 
   ggplot()+
-  geom_point(aes(x=ShareOfGreenArea, y=GreenAreaPerCapita, color=sdgRegion))+ #geom_point, weil metrische Daten, Punkte sind die einzelnen Städte, farblich sortiert nach ihren zugehörigen Regionen
+  geom_point(aes(x=ShareOfGreenArea, y=GreenAreaPerCapita, color=sdgRegion))+
+  #geom_point, weil metrische Daten, Punkte sind die einzelnen Städte, farblich sortiert nach ihren zugehörigen Regionen
   
 #Prettify
   scale_color_brewer(palette="Paired")+ #nicht so grell und alle 8 Gruppen passen in Palette
@@ -105,10 +106,46 @@ graph1 <- urban_green_clean |>  #zur Übersichtlichkeit: Erstellung der Variable
 #Interpretation: grundsätzlich positiver Zusammenhang: bei höherem Grünflächenanteil auch mehr Grünfläche pro Kopf, aber starke Streuung: einige Städte haben bei gleichem Grünflächenanteil viel mehr Grünfläche pro Kopf als Andere -> sind weniger stark besiedelt. Bei der Region: "Northern America and Europe" kann man beispielsweise erkennen, dass viele Städte bei einem vergleichweise großen Gesamtgrünflächenanteil, sehr wenig Grünflächenanteil pro Kopf haben, was auf eine hohe Bevölkerungsdichte hinweist, während "Western Asia and Northern Africa" viele gegensätzliche Ausreißer enthält.
 ```
 
-Grafik 2
+Grafik 2 - Vorschlag
 
 ```{r}
+library("maps")
+library("plotly")
+#Normalisiere Namen aus dem Datensatz um sie an Kartenformat anzupassen. Vektor mit Namen generiert mit Claude Opus 5.5
+namen <- c(
+  "Bolivia (Plurinational State of)" = "Bolivia", "Czechia" = "Czech Republic",
+  "Democratic People's Republic of Korea" = "North Korea", "Eswatini" = "Swaziland",
+  "Iran (Islamic Republic of)" = "Iran", "Lao People's Democratic Republic" = "Laos",
+  "Netherlands (Kingdom of the)" = "Netherlands", "Republic of Korea" = "South Korea",
+  "Republic of Moldova" = "Moldova", "Russian Federation" = "Russia",
+  "State of Palestine" = "Palestine", "Syrian Arab Republic" = "Syria",
+  "Türkiye" = "Turkey", "United Kingdom of Great Britain and Northern Ireland" = "UK",
+  "United Republic of Tanzania" = "Tanzania", "United States of America" = "USA",
+  "Venezuela (Bolivarian Republic of)" = "Venezuela", "Viet Nam" = "Vietnam")
 
+
+```
+
+```{r}
+länder <- urban_green_clean |>
+  filter(year == 2020) |>
+  mutate(country = recode(country, !!!namen))|>
+  group_by(country) |>
+  summarise(anteil = mean(ShareOfGreenArea))
+
+karte <- map_data("world")
+
+grafik2 <- karte |>
+  #Left Join fix via ChatGPT
+  left_join(länder, by = c("region" = "country")) |>
+  ggplot(aes(x = long, y = lat, group = group, fill = anteil)) +
+  geom_polygon(color = NA) +
+  coord_quickmap() + 
+  theme_void() +
+  labs(title = "Durchschnittlicher Grünflächenanteil der Städte 2020", fill ="Grünflächenanteil")
+
+
+ggplotly(grafik2)
 ```
 
 Grafik 3
