@@ -72,7 +72,7 @@ urban_green_clean |>
 
 #### 7.1 3 Interessante Grafiken
 
- 1. Create three interesting graphs. For example, show the change over time for one country or compare several countries. You can get creative here and may transform the data as you like.
+1.  Create three interesting graphs. For example, show the change over time for one country or compare several countries. You can get creative here and may transform the data as you like.
 
 Grafik 1
 
@@ -92,6 +92,6 @@ Grafik 3
 
 ```
 
-#### *7.2 Verschönere die Grafiken* 
+#### *7.2 Verschönere die Grafiken*
 
 *2. Prettify the graphs.*
